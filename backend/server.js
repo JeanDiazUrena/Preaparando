@@ -31,13 +31,14 @@ app.get('/api/productos', async (req, res) => {
 });
 
 // Configuración de producción
+// Configuración de producción
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
   
-  // 🟢 CORRECCIÓN: Usar :*ruta (el : es para el parámetro, el * es el comodín)
-  app.get('/:ruta*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
+  // 🥇 CORRECCIÓN FINAL: Usa dos puntos y el asterisco
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
 }
 
 // Servidor
