@@ -30,16 +30,16 @@ app.get('/api/productos', async (req, res) => {
   }
 });
 
-// Configuración de producción
-// Configuración de producción
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  
-  // 🥇 CORRECCIÓN FINAL: Usa dos puntos y el asterisco
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-  });
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  // ✅ RUTA DE RESPALDO CORRECTA
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
 }
+
 
 // Servidor
 const PORT = process.env.PORT || 5000;
