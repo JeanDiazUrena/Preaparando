@@ -32,10 +32,12 @@ app.get('/api/productos', async (req, res) => {
 
 // Configuración de producción
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-  });
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  
+  // 🟢 CORRECCIÓN: Usar app.use() en lugar de app.get() para el comodín.
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
 }
 
 // Servidor
