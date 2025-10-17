@@ -3,13 +3,15 @@ import { ref, onMounted } from 'vue'
 
 const usuarios = ref([]); // Lista de usuarios
 
+// Proyecto.vue <script setup>
+// ...
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/users')
-    const data = await res.json()
-    usuarios.value = data 
+    // CAMBIA LA URL para que coincida con la nueva ruta
+    const res = await fetch('http://localhost:5000/api/productos') 
+    // ...
   } catch (error) {
-    console.error("Error al conectar con el backend:", error);
+    // ...
   }
 })
 </script>
@@ -18,7 +20,7 @@ onMounted(async () => {
   <div class="proyecto-container">
     <h1>Usuarios desde PostgreSQL:</h1>
     <ul>
-      <li v-for="usuario in usuarios" :key="usuario.id">{{ usuario.Jean }}</li>
+      <li v-for="usuario in usuarios" :key="usuario.id">{{ usuario.nombre }}</li>
 >
     </ul>
   </div>

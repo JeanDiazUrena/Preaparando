@@ -7,6 +7,9 @@
     <title>frontend</title>
   </head>
   <body>
+    <li v-for="producto in usuarios" :key="producto.id"> 
+    {{ producto.nombre }} - ${{ producto.precio }}
+   </li>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
