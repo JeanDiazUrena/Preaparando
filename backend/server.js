@@ -34,8 +34,8 @@ app.get('/api/productos', async (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
   
-  // 🟢 CORRECCIÓN: Usar app.use() en lugar de app.get() para el comodín.
-  app.use('*', (req, res) => {
+  // 🟢 Usa el comodín con nombre, por ejemplo: *ruta
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
   });
 }
