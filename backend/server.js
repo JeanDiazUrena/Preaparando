@@ -39,9 +39,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
   // Capturar cualquier otra ruta y devolver index.html (Single Page App)
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-  });
+  app.all('*', (req, res) => {
+  res.status(404).send('Ruta no encontrada');
+});
+
 }
 
 // 🚀 Iniciar servidor
