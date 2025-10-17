@@ -34,7 +34,7 @@ app.get('/api/productos', async (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
   
-  // 🟢 Usa el comodín con nombre, por ejemplo: *ruta
+  // 🟢 CORRECCIÓN: Usar :*ruta (el : es para el parámetro, el * es el comodín)
   app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
   });
