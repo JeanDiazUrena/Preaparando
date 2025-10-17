@@ -33,17 +33,21 @@ app.get('/api/productos', async (req, res) => {
   }
 });
 
-// 🏭 Configuración de producción (Render, Vercel, etc.)
+// 🏭 Servir frontend compilado en producción (si existe)
 if (process.env.NODE_ENV === 'production') {
-  // Servir archivos del frontend compilado
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-  // Capturar cualquier otra ruta y devolver index.html (Single Page App)
-  app.all('*', (req, res) => {
-  res.status(404).send('Ruta no encontrada');
-});
-
 }
+
+// 🔹 Catch-all para SPA o rutas no encontradas
+app.get('*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    // En producción, devolver index.html de SPA
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  } else {
+    // En desarrollo, devolver 404 simple
+    res.status(404).send('Ruta no encontrada');
+  }
+});
 
 // 🚀 Iniciar servidor
 const PORT = process.env.PORT || 5000;
